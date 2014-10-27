@@ -18,16 +18,29 @@ import com.eventkart.service.VendorDetailsService;
 import com.google.gson.Gson;
 
 @Controller
-public class VendorRegisterController {
+public class SellerController {
 
 	@Autowired
 	private VendorDetailsService vendorDetailsService;
 
-	private static final Logger logger = LoggerFactory.getLogger(VendorRegisterController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SellerController.class);
 
 	@RequestMapping(value = "/vendor", method = RequestMethod.POST)
 	public @ResponseBody
 	GenericResponse registerVendor(@RequestBody VendorRegisterRequest registerRequest) {
+
+		long start = System.currentTimeMillis();
+
+		logger.info("Entering registerVendor {}", start);
+
+		logger.info("Exiting registerVendor {}", System.currentTimeMillis());
+		return vendorDetailsService.addVendor(registerRequest);
+
+	}
+	
+	@RequestMapping(value = "/v1/sellers", method = RequestMethod.POST)
+	public @ResponseBody
+	GenericResponse registerSellers(@RequestBody VendorRegisterRequest registerRequest) {
 
 		long start = System.currentTimeMillis();
 
